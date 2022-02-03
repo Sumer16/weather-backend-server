@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "This is a sample swagger documentation for mocking endpoints created using express.js as a part of CS 561 Assignment 4.",
+    "description": "This is a swagger documentation for endpoints created using express.js as a part of CS 561 Assignment 4, now also being used in Assignment 5",
     "version": "1.0.0",
     "title": "CS 561 Assignment 4: Swagger Weather",
     "termsOfService": "http://swagger.io/terms/",
