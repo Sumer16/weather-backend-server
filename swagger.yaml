@@ -1,0 +1,178 @@
+openapi: 3.0.0
+info:
+  description:
+    "This is a swagger documentation for endpoints created using express.js as a part of CS 561 Assignment 4, now also being used in Assignment 5."
+  version: 1.0.0
+  title: "CS 561 Assignment 4: Swagger Weather"
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+tags:
+  - name: v1
+    description: Everything about Weather API
+    externalDocs:
+      description: Find out more about the weather API
+      url: http://swagger.io
+paths:
+  /auth:
+    post:
+      tags:
+        - v1
+      summary: Authenticates and returns a token
+      description: "We should authenticate users and return them a mock token"
+      operationId: authorizeUsers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+        description: The user to login
+        required: true
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+                    expires: "2012-04-23T18:25:43.511Z"
+  /weather:
+    get:
+      tags:
+        - v1
+      summary: Returns mock data from OpenWeather API
+      description: "should mock OpenWeather's data from Node Server"
+      operationId: getWeather
+      parameters:
+        - name: q
+          in: query
+          description:
+            City name, state code and country code divided by comma, The API
+            response should be returned in the same language as the language of
+            requested location name if the location is in our predefined list of
+            more than 200,000 locations then it will work.
+          required: true
+          schema:
+            type: string
+        - name: appid
+          in: query
+          description: Your unique API key from OpenWeatherAPI
+          required: true
+          schema:
+            type: string
+        - name: mode
+          in: query
+          description:
+            Response format. Possible values are xml and html. If you don't use
+            the mode parameter format is JSON by default.
+          required: false
+          schema:
+            type: string
+        - name: units
+          in: query
+          description:
+            Units of measurement - standard, metric and imperial units are
+            available. If no units parameter applied, standard is default.
+          required: false
+          schema:
+            type: string
+        - name: lang
+          in: query
+          description: You can use this parameter to get the output in your language.
+          required: false
+          schema:
+            type: string
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    coord:
+                      lon: -123.262
+                      lat: 44.5646
+                    weather:
+                    - id: 801
+                      main: Clouds
+                      description: few clouds
+                      icon: 02d
+                    base: stations
+                    main:
+                      temp: 47.19
+                      feels_like: 47.19
+                      temp_min: 42.71
+                      temp_max: 55.81
+                      pressure: 1024
+                      humidity: 75
+                      sea_level: 1024
+                      grnd_level: 1016
+                    visibility: 10000
+                    wind:
+                      speed: 2.39
+                      deg: 17
+                      gust: 2.55
+                    clouds:
+                      all: 22
+                    dt: 1642982860
+                    sys:
+                      type: 2
+                      id: 2010260
+                      country: US
+                      sunrise: 1642952435
+                      sunset: 1642986538
+                    timezone: -28800
+                    id: 5720727
+                    name: Corvallis
+                    cod: 200
+        "400":
+          description: Invalid request for data
+  /hello:
+    get:
+      tags:
+        - v1
+      summary: Returns a greeting message
+      description: "should return a greeting of our choice"
+      operationId: getGreeting
+
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    message: Howdy Mate!!
+        "403":
+          description: You do not have necessary permissions for the resource
+
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: http://localhost:3000/v1
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
