@@ -33,40 +33,6 @@ app.use(function (req, res, next) {
     next();
 });
 
-// Weather
-app.get('/v1/weather', getWeather);
-
-function getWeather(req, res) {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
-
-    if (token == null) return res.sendStatus(401);
-
-    if (token == token_jwt) {
-        res.json(result);
-    } else {
-        return res.sendStatus(403);
-    }
-}
-
-// Greeting
-app.get('/v1/hello', getGreeting);
-
-function getGreeting(req, res) {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
-
-    if (token == null) return res.sendStatus(401);
-
-    if (token == token_jwt) {
-        res.json({
-            'message': 'Howdy Mate!!'
-        });
-    } else {
-        return res.sendStatus(403);
-    }
-}
-
 // Authorization
 app.post('/v1/auth', getToken);
 
