@@ -51,8 +51,7 @@ paths:
       parameters:
         - name: q
           in: query
-          description:
-            City name, state code and country code divided by comma, The API
+          description: City name, state code and country code divided by comma, The API
             response should be returned in the same language as the language of
             requested location name if the location is in our predefined list of
             more than 200,000 locations then it will work.
@@ -67,16 +66,14 @@ paths:
             type: string
         - name: mode
           in: query
-          description:
-            Response format. Possible values are xml and html. If you don't use
+          description: Response format. Possible values are xml and html. If you don't use
             the mode parameter format is JSON by default.
           required: false
           schema:
             type: string
         - name: units
           in: query
-          description:
-            Units of measurement - standard, metric and imperial units are
+          description: Units of measurement - standard, metric and imperial units are
             available. If no units parameter applied, standard is default.
           required: false
           schema:
@@ -161,7 +158,7 @@ externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
 servers:
-  - url: http://50.16.127.52:3000/v1
+  - url: http://54.160.132.38:3000/v1
 components:
   schemas:
     User:
