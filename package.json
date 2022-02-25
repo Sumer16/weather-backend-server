@@ -9,6 +9,8 @@
   "author": "Sumer Patel",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "swagger-ui-express": "^4.3.0",
+    "yamljs": "^0.3.0"
   }
 }
